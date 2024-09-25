@@ -11,7 +11,7 @@ function AppLayout() {
         title: "Shop",
         headerRight: () => <CartIcon />
       }} />
-      <Stack.Screen name="[id]" options={{
+      <Stack.Screen name="productDetails" options={{
         headerTitle: "Product details",
         headerRight: () => <CartIcon />,
       }} />

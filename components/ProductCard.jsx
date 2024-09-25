@@ -10,7 +10,7 @@ export default function ProductCard(props) {
 
     const handleOnPress = () => {
         dispatch(productSlice.actions.setSelectedProduct(props.id))
-        router.push("/[id]")
+        router.push("/productDetails")
     }
 
     return (
