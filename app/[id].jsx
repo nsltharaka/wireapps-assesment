@@ -1,11 +1,19 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { formatter } from "../data/currency";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { router } from "expo-router";
+import cartSlice from "../data/cartSlice"
 
 export default function ItemDetails() {
 
     const item = useSelector(state => state.products.selectedProduct)
+    const dispatch = useDispatch()
+
+    const handleAddItem = () => {
+        dispatch(cartSlice.actions.addItem(item))
+        router.push("/cart")
+    }
 
     return (
         <>
@@ -41,7 +49,9 @@ export default function ItemDetails() {
 
             </ScrollView>
 
-            <TouchableOpacity className="bg-black p-4 w-[90%] self-center items-center justify-center rounded-lg absolute bottom-10">
+            <TouchableOpacity
+                onPress={handleAddItem}
+                className="bg-black p-4 w-[90%] self-center items-center justify-center rounded-lg absolute bottom-10">
                 <Text className="text-white text-lg font-bold">Add to cart</Text>
             </TouchableOpacity>
 
