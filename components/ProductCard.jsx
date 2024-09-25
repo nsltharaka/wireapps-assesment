@@ -2,7 +2,7 @@ import { Image, Text, TouchableOpacity } from "react-native";
 import {formatter} from "../data/currency"
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
-import productSlice from "@/data/productSlice";
+import {productSlice} from "@/data/productSlice";
 
 export default function ProductCard(props) {
 
