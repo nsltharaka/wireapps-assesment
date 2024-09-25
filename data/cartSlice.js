@@ -11,7 +11,7 @@ export default cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const item = action.payload
-            state.items = [...state.items, { ...item, quantity: 1, size: 0 }]
+            state.items = [...state.items, { ...item, quantity: 1 }]
         },
         removeItem: (state, action) => {
             state.items = state.items.filter(i => i.id !== action.payload)

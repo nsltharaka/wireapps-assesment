@@ -30,6 +30,7 @@ export default function CartItem(item) {
 
             <View className="flex-shrink w-[100%] px-2 justify-between">
                 <Text className="text-lg leading-6" numberOfLines={2}>{item.name}</Text>
+                {item.size && <Text>Size: {item.size}</Text>}
 
                 <View className="flex-row items-center self-start gap-6">
                     <Ionicons name="remove" size={24} color="gray" onPress={handleSubtractQty} />

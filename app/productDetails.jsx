@@ -1,9 +1,10 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { formatter } from "../data/currency";
 
 import { useDispatch, useSelector } from "react-redux";
 import { router } from "expo-router";
 import cartSlice from "../data/cartSlice"
+import { useState } from "react";
 
 export default function ItemDetails() {
 
@@ -11,12 +12,22 @@ export default function ItemDetails() {
     const cartItems = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
 
+    const [selectedSize, setSelectedSize] = useState(item.sizes[0] || null)
+
     const handleAddItem = () => {
-        dispatch(cartSlice.actions.addItem(item))
+        dispatch(cartSlice.actions.addItem({ ...item, size: selectedSize }))
         router.push("/cart")
     }
 
     const alreadyInCart = cartItems.find(i => i.id === item.id)
+
+    const SizeIcon = ({ value, selected }) => (
+        <TouchableOpacity
+            onPress={() => setSelectedSize(value)}
+            className={`ml-4 rounded-full border border-black aspect-square items-center justify-center w-8 ${selected && 'bg-black'}`}>
+            <Text className={`font-semibold ${selected && 'text-white'}`}>{value}</Text>
+        </TouchableOpacity>
+    )
 
     return (
         <>
@@ -40,6 +51,19 @@ export default function ItemDetails() {
                         )}</Text>
                         <Text className={`${item.stockStatus.includes("IN") ? 'text-green-700' : 'text-red-600'} text-lg`} >{item.stockStatus.toLowerCase()}</Text>
                     </View>
+
+                    {item.sizes.length &&
+                        <View className="flex-row">
+                            <Text className="font-semibold text-lg mb-2">Sizes:</Text>
+                            <View className="flex-row">
+                                {
+                                    item.sizes.map((size, i) => (
+                                        <SizeIcon key={i} value={size} selected={selectedSize == size} />
+                                    ))
+                                }
+                            </View>
+                        </View>
+                    }
 
                     <View>
                         {item.brandName && <Text>Brand: {item.brandName}</Text>}
