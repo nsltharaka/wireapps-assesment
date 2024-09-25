@@ -1,11 +1,11 @@
 import { Image, Text, TouchableOpacity } from "react-native";
-import formatCurrency from "../data/currency"
+import {formatter} from "../data/currency"
 import { router } from "expo-router";
 
 export default function ProductCard(props) {
 
     return (
-        <TouchableOpacity onPress={() => router.push(`/${props.id}`)}
+        <TouchableOpacity onPress={() => router.push({pathname : "/[id]", params : props})}
         className="bg-white w-[49%] rounded-lg p-4">
             <Image src={props.mainImage} style={{
                 width: "100%",
@@ -18,7 +18,7 @@ export default function ProductCard(props) {
 
             <TouchableOpacity className="flex-row items-center justify-between mt-2">
                 <Text className="text-lg font-semibold">{
-                    formatCurrency(
+                    formatter(
                         props.price.amount,
                         props.price.currency
                     )
