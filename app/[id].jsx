@@ -8,12 +8,15 @@ import cartSlice from "../data/cartSlice"
 export default function ItemDetails() {
 
     const item = useSelector(state => state.products.selectedProduct)
+    const cartItems = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
 
     const handleAddItem = () => {
         dispatch(cartSlice.actions.addItem(item))
         router.push("/cart")
     }
+
+    const alreadyInCart = cartItems.find(i => i.id === item.id)
 
     return (
         <>
@@ -49,11 +52,15 @@ export default function ItemDetails() {
 
             </ScrollView>
 
-            <TouchableOpacity
-                onPress={handleAddItem}
-                className="bg-black p-4 w-[90%] self-center items-center justify-center rounded-lg absolute bottom-10">
-                <Text className="text-white text-lg font-bold">Add to cart</Text>
-            </TouchableOpacity>
+            {
+                item.stockStatus.includes("IN") &&
+                <TouchableOpacity
+                    disabled={alreadyInCart}
+                    onPress={handleAddItem}
+                    className="bg-black p-4 w-[90%] self-center items-center justify-center rounded-lg absolute bottom-10">
+                    <Text className="text-white text-lg font-bold">{alreadyInCart ? 'Already in the cart' : 'Add to cart'}</Text>
+                </TouchableOpacity>
+            }
 
         </>
     )
