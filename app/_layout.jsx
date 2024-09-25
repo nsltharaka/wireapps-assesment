@@ -1,24 +1,31 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, Stack } from "expo-router";
+import { Provider } from "react-redux"
+import { store } from "../data/store"
+import CartIcon from "../components/CartIcon"
 
-export default function RootLayout() {
+function AppLayout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{
         title: "Shop",
-        headerRight: () => (
-          <Ionicons name="cart-outline" size={30} color="black"  onPress={() => router.push("/cart")}/>
-        )
+        headerRight: () => <CartIcon />
       }} />
-      <Stack.Screen name="[id]"  options={{
-        headerTitle : "Product details",
-        headerRight: () => (
-          <Ionicons name="cart-outline" size={30} color="black"  onPress={() => router.push("/cart")}/>
-        )
-      }}/>
+      <Stack.Screen name="[id]" options={{
+        headerTitle: "Product details",
+        headerRight: () => <CartIcon />,
+      }} />
       <Stack.Screen name="cart" options={{
         title: "Cart"
       }} />
     </Stack>
   );
+}
+
+export default function RootLayout() {
+  return (
+    <Provider store={store}>
+      <AppLayout />
+    </Provider>
+  )
 }

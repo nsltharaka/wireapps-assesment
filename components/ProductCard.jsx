@@ -1,11 +1,20 @@
 import { Image, Text, TouchableOpacity } from "react-native";
 import {formatter} from "../data/currency"
 import { router } from "expo-router";
+import { useDispatch } from "react-redux";
+import productSlice from "@/data/productSlice";
 
 export default function ProductCard(props) {
 
+    const dispatch = useDispatch()
+
+    const handleOnPress = () => {
+        dispatch(productSlice.actions.setSelectedProduct(props.id))
+        router.push("/[id]")
+    }
+
     return (
-        <TouchableOpacity onPress={() => router.push({pathname : "/[id]", params : props})}
+        <TouchableOpacity onPress={handleOnPress}
         className="bg-white w-[49%] rounded-lg p-4">
             <Image src={props.mainImage} style={{
                 width: "100%",

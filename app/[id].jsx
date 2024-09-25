@@ -1,11 +1,11 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { formatter } from "../data/currency";
 
-import data from "../data/products.json";
+import { useSelector } from "react-redux";
 
 export default function ItemDetails() {
 
-    const item = data[0]
+    const item = useSelector(state => state.products.selectedProduct)
 
     return (
         <>
