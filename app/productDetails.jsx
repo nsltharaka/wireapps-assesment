@@ -1,10 +1,10 @@
-import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { formatter } from "../data/currency";
 
-import { useDispatch, useSelector } from "react-redux";
 import { router } from "expo-router";
-import cartSlice from "../data/cartSlice"
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import cartSlice from "../data/cartSlice";
 
 export default function ItemDetails() {
 

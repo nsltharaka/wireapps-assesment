@@ -1,8 +1,7 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { router, Stack } from "expo-router";
-import { Provider } from "react-redux"
-import { store } from "../data/store"
-import CartIcon from "../components/CartIcon"
+import { Stack } from "expo-router";
+import { Provider } from "react-redux";
+import CartIcon from "../components/CartIcon";
+import { store } from "../data/store";
 
 function AppLayout() {
   return (
