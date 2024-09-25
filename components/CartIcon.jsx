@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function CartIcon() {
 
-    const cartLength = useSelector(state => state.cart.length)
+    const cartLength = useSelector(state => state.cart.items.length)
 
     return (
         <TouchableOpacity onPress={() => router.push("/cart")}>
